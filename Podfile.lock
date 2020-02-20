@@ -1,0 +1,22 @@
+PODS:
+  - FLEX (3.1.2)
+  - Kingfisher (5.13.1):
+    - Kingfisher/Core (= 5.13.1)
+  - Kingfisher/Core (5.13.1)
+
+DEPENDENCIES:
+  - FLEX
+  - Kingfisher (~> 5.13)
+
+SPEC REPOS:
+  trunk:
+    - FLEX
+    - Kingfisher
+
+SPEC CHECKSUMS:
+  FLEX: e13e805fc3eec8732cc227d1f7508770d46e9587
+  Kingfisher: f33a848445e33c543620812158dc5d47f6bf90df
+
+PODFILE CHECKSUM: 21339b3ffbdc3524bb56828ad5458d08fd72618a
+
+COCOAPODS: 1.8.4

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ArticleViewController.swift
 //  Articles
 //
 //  Created by Karen Minasyan on 2/20/20.
@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ArticleViewController: UIViewController {
 
+    var viewModel: ArticleViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 
-
 }
-
