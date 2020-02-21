@@ -8,11 +8,13 @@
 
 import Foundation
 
+typealias TopWord = (word: String, count: Int)
+
 struct ArticleDetails {
     var title: String?
     var tags: Set<String>
     var bodyText: NSMutableAttributedString?
-    var topWords: [String: Int]?
+    var topWords: [TopWord]?
     var categoryText: String?
     var date: Date?
     var imageURL: URL?

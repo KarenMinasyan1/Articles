@@ -9,13 +9,14 @@
 import UIKit
 
 protocol ArticleViewModelDelegate: AnyObject {
-    func articleViewModelDidUpdate(details: ArticleDetails)
+    func articleViewModelDidReceive(details: ArticleDetails)
+    func articleViewModelDidUpdate(bodyText: NSAttributedString)
     func articleViewModelDidReceive(error: ArticleAPIError)
 }
 
 protocol ArticleViewModelInput {
     func loadArticle()
-    func topWordSelected(text: String)
+    func topWordSelected(row: Int)
 }
 
 class ArticleViewModel: ViewModel {
@@ -37,13 +38,17 @@ extension ArticleViewModel: ArticleViewModelInput {
                 self?.delegate?.articleViewModelDidReceive(error: error)
             } else if let article = result?.response?.content {
                 self?.article = article
-                self?.articleDetails = article.convertToArticleDetails()
-                print("success")
+                if let details = article.convertToArticleDetails() {
+                    self?.articleDetails = details
+                    self?.delegate?.articleViewModelDidReceive(details: details)
+                }
             }
         }
     }
     
-    func topWordSelected(text: String) {
-        
+    func topWordSelected(row: Int) {
+        guard let key = articleDetails?.topWords?[row].word else { return }
+        guard let attributedString = article?.fields?.bodyText?.getHighlightedAttributedString(with: key) else { return }
+        delegate?.articleViewModelDidUpdate(bodyText: attributedString)
     }
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CA6186A2400652B0047F3D7 /* TopWordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA618692400652B0047F3D7 /* TopWordButton.swift */; };
+		1CA6186C240069DC0047F3D7 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6186B240069DC0047F3D7 /* DateExtensions.swift */; };
 		1CF48C4423FEEAB700E43B10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C4323FEEAB700E43B10 /* AppDelegate.swift */; };
 		1CF48C4623FEEAB700E43B10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C4523FEEAB700E43B10 /* SceneDelegate.swift */; };
 		1CF48C4823FEEAB700E43B10 /* ArticleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C4723FEEAB700E43B10 /* ArticleListViewController.swift */; };
@@ -35,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		078027ADA223D8E6BABA55A8 /* Pods_Articles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Articles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1CA618692400652B0047F3D7 /* TopWordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWordButton.swift; sourceTree = "<group>"; };
+		1CA6186B240069DC0047F3D7 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		1CF48C4023FEEAB700E43B10 /* Articles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Articles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF48C4323FEEAB700E43B10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1CF48C4523FEEAB700E43B10 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 			children = (
 				1CF48C5F23FEEBDF00E43B10 /* ArticleViewController.swift */,
 				1CF48C6423FEEC6600E43B10 /* ArticleViewModel.swift */,
+				1CA618692400652B0047F3D7 /* TopWordButton.swift */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			children = (
 				1CF48C7523FF1F5200E43B10 /* StringExtensions.swift */,
 				9C74DB9723FFB3E100C3992B /* UIViewControllerExtensions.swift */,
+				1CA6186B240069DC0047F3D7 /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -344,9 +350,11 @@
 				1CF48C6C23FEF3B700E43B10 /* ArticleAPIError.swift in Sources */,
 				1CF48C7223FF082600E43B10 /* ArticleResponse.swift in Sources */,
 				1CF48C4423FEEAB700E43B10 /* AppDelegate.swift in Sources */,
+				1CA6186C240069DC0047F3D7 /* DateExtensions.swift in Sources */,
 				1CF48C6323FEEC3E00E43B10 /* ViewModel.swift in Sources */,
 				1CF48C6A23FEEFDA00E43B10 /* ArticlesProvider.swift in Sources */,
 				1CF48C6523FEEC6600E43B10 /* ArticleViewModel.swift in Sources */,
+				1CA6186A2400652B0047F3D7 /* TopWordButton.swift in Sources */,
 				1CF48C4623FEEAB700E43B10 /* SceneDelegate.swift in Sources */,
 				1CF48C7423FF099500E43B10 /* ArticleListResponse.swift in Sources */,
 			);

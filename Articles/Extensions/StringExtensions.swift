@@ -13,7 +13,7 @@ extension String {
     func getHighlightedAttributedString(with key: String, color: UIColor = .yellow) -> NSAttributedString {
         let attributed = NSMutableAttributedString(string: self)
         do {
-            // putting \b before and after the search pattern will turn it into a whole word search (that is, the pattern “\bcat\b” will match only the word “cat,” but not “catch”)
+            // Putting \b before and after the search pattern will turn it into a whole word search (that is, the pattern “\bcat\b” will match only the word “cat,” but not “catch”)
             let regex = try NSRegularExpression(pattern: "\\b\(key)\\b", options: [.caseInsensitive])
             let results = regex.matches(in: self, range: NSRange(startIndex..., in: self))
             
@@ -42,7 +42,9 @@ extension String {
     }
     
     // "words" returns an array with all words in the string
+    // One letter strings (A, é, ϴ, a) are ignored
     var words: [String] {
-        split { !$0.isLetter }.map { String($0.lowercased()) }
+        split { !$0.isLetter }.map { String($0.lowercased()) }.filter { $0.count > 1 }
     }
 }
+

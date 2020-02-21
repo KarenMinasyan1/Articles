@@ -23,7 +23,7 @@ class ArticlesProvider: ArticleAPI {
     }
     
     func getArticle(id: String, completion: @escaping (ArticleResponse?, ArticleAPIError?) -> ()) {
-        let params = ["show-fields": "thumbnail,bodyText", "api-key": Constants.apiKey]
+        let params = ["show-fields": "thumbnail,bodyText,headline", "api-key": Constants.apiKey]
         Networking.makeNetworkRequest(url: Constants.baseURL, path: "/\(id)", params: params, responseType: ArticleResponse.self, completion: completion)
     }
 }
