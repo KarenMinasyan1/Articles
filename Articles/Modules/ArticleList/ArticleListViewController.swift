@@ -41,18 +41,17 @@ class ArticleListViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.getArticlesCount()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.reuseID, for: indexPath) as! ArticleCell
-        cell.setupWith(viewModel: viewModel.getArticleCellViewModel(index: indexPath.row))
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.reuseID, for: indexPath) as? ArticleCell {
+            cell.setupWith(viewModel: viewModel.getArticleCellViewModel(index: indexPath.row))
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -101,9 +100,10 @@ extension ArticleListViewController: ArticleListViewModelDelegate {
     
     func articleListViewModelDidCreate(viewModel: ArticleViewModel) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let viewController = storyboard.instantiateViewController(withIdentifier: "ArticleVC") as! ArticleViewController
-        viewController.viewModel = viewModel
-        navigationController?.pushViewController(viewController, animated: true)
+        if let viewController = storyboard.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController {
+            viewController.viewModel = viewModel
+            navigationController?.pushViewController(viewController, animated: true)
+        }
     }
 }
 

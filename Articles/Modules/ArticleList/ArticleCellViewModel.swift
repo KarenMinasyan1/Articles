@@ -9,10 +9,18 @@
 import UIKit
 
 class ArticleCellViewModel: ViewModel {
-    var article: Article
+    private var article: Article
     
     init(article: Article, provider: ArticleAPI) {
         self.article = article
         super.init(provider: provider)
+    }
+    
+    func getImageURL() -> URL? {
+        URL(string: article.fields?.thumbnail ?? "")
+    }
+    
+    func getTitle() -> String? {
+        article.webTitle
     }
 }

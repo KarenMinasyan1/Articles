@@ -10,6 +10,11 @@ import UIKit
 
 class ArticleViewController: UIViewController {
 
+    @IBOutlet weak var titleLabel: UILabel!
+        // tagList
+    @IBOutlet weak var bodyTextLabel: UILabel!
+    
+    
     var viewModel: ArticleViewModel!
     
     override func viewDidLoad() {

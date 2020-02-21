@@ -9,7 +9,7 @@ DEPENDENCIES:
   - Kingfisher
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - FLEX
     - Kingfisher
 
@@ -19,4 +19,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ed47e1a2a7a3db58af530db73e2873d4d623c07d
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4

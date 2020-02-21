@@ -17,9 +17,7 @@ class ArticleCell: UITableViewCell {
     static let reuseID = "ArticleCellReuseID"
     
     func setupWith(viewModel: ArticleCellViewModel) {
-        articleTitleLabel.text = viewModel.article.webTitle
-        if let url = URL(string: viewModel.article.fields?.thumbnail ?? "") {
-            articleImageView.kf.setImage(with: url)
-        }
+        articleTitleLabel.text = viewModel.getTitle()
+        articleImageView.kf.setImage(with: viewModel.getImageURL())
     }
 }
