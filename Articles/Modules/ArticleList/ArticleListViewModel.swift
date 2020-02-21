@@ -47,7 +47,7 @@ class ArticleListViewModel: ViewModel {
 
 extension ArticleListViewModel: ArticleListViewModelInput {
     func articleSelected(index: Int) {
-        let viewModel = ArticleViewModel(article: articles[index], provider: provider)
+        let viewModel = ArticleViewModel(articleID: articles[index].id ?? "", provider: provider)
         delegate?.articleListViewModelDidCreate(viewModel: viewModel)
     }
     

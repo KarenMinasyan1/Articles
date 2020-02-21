@@ -43,6 +43,6 @@ extension String {
     
     // "words" returns an array with all words in the string
     var words: [String] {
-        split{ !$0.isLetter }.map{ String($0.lowercased()) }
+        split { !$0.isLetter }.map { String($0.lowercased()) }
     }
 }

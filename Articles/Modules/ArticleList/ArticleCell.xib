@@ -39,8 +39,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="8Y6-u9-JSc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="45j-qT-YDm"/>
+                    <constraint firstItem="8Y6-u9-JSc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="5jQ-7m-aun"/>
                     <constraint firstAttribute="trailing" secondItem="8Y6-u9-JSc" secondAttribute="trailing" constant="16" id="BA4-fd-OCO"/>
-                    <constraint firstItem="8Y6-u9-JSc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="Blc-kI-9F0"/>
                     <constraint firstAttribute="bottom" secondItem="8Y6-u9-JSc" secondAttribute="bottom" constant="16" id="VZk-Sr-7gX"/>
                 </constraints>
             </tableViewCellContentView>

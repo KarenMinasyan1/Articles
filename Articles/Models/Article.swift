@@ -27,3 +27,14 @@ struct Field: Codable {
     let bodyText: String?
     let thumbnail: String?
 }
+
+extension Article {
+    func convertToArticleDetails() -> ArticleDetails? {
+        let tags = Set<String>(webTitle?.words ?? [])
+        let imageURL = URL(string: fields?.thumbnail ?? "")
+        let bodyText = NSMutableAttributedString(string: fields?.bodyText ?? "")
+        let topWords = fields?.bodyText?.wordCount().filter { $0.value >= Constants.topWordLimit }
+        
+        return ArticleDetails(title: webTitle, tags: tags, bodyText: bodyText, topWords: topWords, categoryText: pillarName, date: webPublicationDate, imageURL: imageURL)
+    }
+}
