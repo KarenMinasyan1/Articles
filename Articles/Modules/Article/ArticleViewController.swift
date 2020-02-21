@@ -18,6 +18,8 @@ class ArticleViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var activityView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var viewModel: ArticleViewModel!
     
@@ -29,6 +31,7 @@ class ArticleViewController: UIViewController {
         viewModel.delegate = self
         viewModel.loadArticle()
         // start animating
+        animatingView(true)
     }
     
     // MARK: - UI
@@ -64,6 +67,11 @@ class ArticleViewController: UIViewController {
         }
     }
     
+    func animatingView(_ animating: Bool) {
+        activityView.isHidden = !animating
+        animating ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+    }
+    
     // MARK: - Actions
     @objc func topWordButtonTap(sender: UIButton) {
         viewModel.topWordSelected(row: sender.tag)
@@ -73,6 +81,7 @@ class ArticleViewController: UIViewController {
 extension ArticleViewController: ArticleViewModelDelegate {
     func articleViewModelDidReceive(details: ArticleDetails) {
         DispatchQueue.main.async {
+            self.animatingView(false)
             self.update(details: details)
         }
     }

@@ -34,7 +34,7 @@ extension Article {
         let tags = Set<String>(webTitle?.words ?? [])
         let imageURL = URL(string: fields?.thumbnail ?? "")
         let bodyText = NSMutableAttributedString(string: fields?.bodyText ?? "")
-        let topWords = fields?.bodyText?.wordCount().filter { $0.value >= Constants.topWordLimit }.map { ($0, $1) }.sorted(by: { $0.1 < $1.1 })
+        let topWords = fields?.bodyText?.wordCount().filter { $0.value >= Constants.topWordLimit }.map { ($0, $1) }.sorted(by: { $0.1 > $1.1 })
         
         return ArticleDetails(title: webTitle, tags: tags, bodyText: bodyText, topWords: topWords, categoryText: fields?.headline, date: webPublicationDate, imageURL: imageURL)
     }

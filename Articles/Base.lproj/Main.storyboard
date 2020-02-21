@@ -171,17 +171,36 @@
                                     <constraint firstAttribute="trailing" secondItem="RXN-Ks-gCQ" secondAttribute="trailing" id="psf-dt-nB6"/>
                                 </constraints>
                             </scrollView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LXj-zp-cbO" userLabel="ActivityView">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="YWE-lT-Tmm">
+                                        <rect key="frame" x="188.5" y="390.5" width="37" height="37"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="YWE-lT-Tmm" firstAttribute="centerX" secondItem="LXj-zp-cbO" secondAttribute="centerX" id="QNm-v4-GeQ"/>
+                                    <constraint firstItem="YWE-lT-Tmm" firstAttribute="centerY" secondItem="LXj-zp-cbO" secondAttribute="centerY" id="pyQ-Fl-4OP"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="LXj-zp-cbO" firstAttribute="leading" secondItem="ifd-Uz-gds" secondAttribute="leading" id="3gb-8k-FSh"/>
+                            <constraint firstItem="LXj-zp-cbO" firstAttribute="top" secondItem="ifd-Uz-gds" secondAttribute="top" id="5ZJ-e8-KXb"/>
+                            <constraint firstItem="ifd-Uz-gds" firstAttribute="trailing" secondItem="LXj-zp-cbO" secondAttribute="trailing" id="Jqn-gg-Mx1"/>
                             <constraint firstItem="N7c-XL-8QM" firstAttribute="leading" secondItem="ifd-Uz-gds" secondAttribute="leading" id="Na3-TM-3ZC"/>
                             <constraint firstItem="N7c-XL-8QM" firstAttribute="top" secondItem="ifd-Uz-gds" secondAttribute="top" id="cg4-Tv-VkY"/>
+                            <constraint firstItem="ifd-Uz-gds" firstAttribute="bottom" secondItem="LXj-zp-cbO" secondAttribute="bottom" id="elE-3F-YmW"/>
                             <constraint firstItem="N7c-XL-8QM" firstAttribute="trailing" secondItem="ifd-Uz-gds" secondAttribute="trailing" id="nym-sl-bR7"/>
                             <constraint firstItem="N7c-XL-8QM" firstAttribute="bottom" secondItem="ifd-Uz-gds" secondAttribute="bottom" id="r0g-uN-2Lx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ifd-Uz-gds"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="YWE-lT-Tmm" id="ufs-Nx-cdl"/>
+                        <outlet property="activityView" destination="LXj-zp-cbO" id="zwu-Gm-gop"/>
                         <outlet property="bodyTextLabel" destination="AVY-0e-QOh" id="FuY-tc-9xT"/>
                         <outlet property="categoryLabel" destination="Pbt-6X-gyD" id="GjS-gm-bcB"/>
                         <outlet property="dateLabel" destination="QSG-hN-Icc" id="MNS-YG-F2X"/>
