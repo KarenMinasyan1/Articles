@@ -9,18 +9,17 @@
 import UIKit
 import Kingfisher
 
-class ArticleListCell: UITableViewCell {
+class ArticleCell: UITableViewCell {
 
     @IBOutlet weak var articleImageView: UIImageView!
     @IBOutlet weak var articleTitleLabel: UILabel!
     
-    static let reuseID = "ArticleListCellReuseID"
+    static let reuseID = "ArticleCellReuseID"
     
-    func setupWith(article: Article) {
-        articleTitleLabel.text = article.webTitle
-        if let url = URL(string: article.fields?.thumbnail ?? "") {
+    func setupWith(viewModel: ArticleCellViewModel) {
+        articleTitleLabel.text = viewModel.article.webTitle
+        if let url = URL(string: viewModel.article.fields?.thumbnail ?? "") {
             articleImageView.kf.setImage(with: url)
         }
     }
-    
 }

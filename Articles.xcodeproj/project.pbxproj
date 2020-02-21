@@ -24,10 +24,12 @@
 		1CF48C7023FEFF4200E43B10 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C6F23FEFF4200E43B10 /* Networking.swift */; };
 		1CF48C7223FF082600E43B10 /* ArticleResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C7123FF082600E43B10 /* ArticleResponse.swift */; };
 		1CF48C7423FF099500E43B10 /* ArticleListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C7323FF099500E43B10 /* ArticleListResponse.swift */; };
-		1CF48C7623FF1F5200E43B10 /* Extension+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C7523FF1F5200E43B10 /* Extension+String.swift */; };
-		1CF48C7B23FF24E900E43B10 /* ArticleListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C7923FF24E900E43B10 /* ArticleListCell.swift */; };
-		1CF48C7C23FF24E900E43B10 /* ArticleListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CF48C7A23FF24E900E43B10 /* ArticleListCell.xib */; };
+		1CF48C7623FF1F5200E43B10 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C7523FF1F5200E43B10 /* StringExtensions.swift */; };
+		1CF48C7B23FF24E900E43B10 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C7923FF24E900E43B10 /* ArticleCell.swift */; };
+		1CF48C7C23FF24E900E43B10 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1CF48C7A23FF24E900E43B10 /* ArticleCell.xib */; };
 		4DBF675E973CFC5AEB828773 /* Pods_Articles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 078027ADA223D8E6BABA55A8 /* Pods_Articles.framework */; };
+		9C74DB9523FFB13700C3992B /* ArticleCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C74DB9423FFB13700C3992B /* ArticleCellViewModel.swift */; };
+		9C74DB9823FFB3E100C3992B /* UIViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C74DB9723FFB3E100C3992B /* UIViewControllerExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,10 +53,12 @@
 		1CF48C6F23FEFF4200E43B10 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		1CF48C7123FF082600E43B10 /* ArticleResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleResponse.swift; sourceTree = "<group>"; };
 		1CF48C7323FF099500E43B10 /* ArticleListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListResponse.swift; sourceTree = "<group>"; };
-		1CF48C7523FF1F5200E43B10 /* Extension+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+String.swift"; sourceTree = "<group>"; };
-		1CF48C7923FF24E900E43B10 /* ArticleListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListCell.swift; sourceTree = "<group>"; };
-		1CF48C7A23FF24E900E43B10 /* ArticleListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleListCell.xib; sourceTree = "<group>"; };
+		1CF48C7523FF1F5200E43B10 /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
+		1CF48C7923FF24E900E43B10 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
+		1CF48C7A23FF24E900E43B10 /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
 		60D70E0EA165986F4C3EF6E9 /* Pods-Articles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Articles.release.xcconfig"; path = "Target Support Files/Pods-Articles/Pods-Articles.release.xcconfig"; sourceTree = "<group>"; };
+		9C74DB9423FFB13700C3992B /* ArticleCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCellViewModel.swift; sourceTree = "<group>"; };
+		9C74DB9723FFB3E100C3992B /* UIViewControllerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtensions.swift; sourceTree = "<group>"; };
 		A7C522A4C3DDB50C1B6F2893 /* Pods-Articles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Articles.debug.xcconfig"; path = "Target Support Files/Pods-Articles/Pods-Articles.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,6 +105,7 @@
 			children = (
 				1CF48C5D23FEEB8E00E43B10 /* Application */,
 				1CF48C6123FEEC1C00E43B10 /* Common */,
+				9C74DB9623FFB31900C3992B /* Extensions */,
 				1CF48C5E23FEEBA200E43B10 /* Constants */,
 				1CF48C5823FEEB0900E43B10 /* Models */,
 				1CF48C5723FEEACD00E43B10 /* Modules */,
@@ -137,8 +142,9 @@
 			children = (
 				1CF48C4723FEEAB700E43B10 /* ArticleListViewController.swift */,
 				1CF48C6623FEECE000E43B10 /* ArticleListViewModel.swift */,
-				1CF48C7923FF24E900E43B10 /* ArticleListCell.swift */,
-				1CF48C7A23FF24E900E43B10 /* ArticleListCell.xib */,
+				1CF48C7923FF24E900E43B10 /* ArticleCell.swift */,
+				1CF48C7A23FF24E900E43B10 /* ArticleCell.xib */,
+				9C74DB9423FFB13700C3992B /* ArticleCellViewModel.swift */,
 			);
 			path = ArticleList;
 			sourceTree = "<group>";
@@ -173,7 +179,6 @@
 			isa = PBXGroup;
 			children = (
 				1CF48C6223FEEC3E00E43B10 /* ViewModel.swift */,
-				1CF48C7523FF1F5200E43B10 /* Extension+String.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -195,6 +200,15 @@
 				60D70E0EA165986F4C3EF6E9 /* Pods-Articles.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9C74DB9623FFB31900C3992B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1CF48C7523FF1F5200E43B10 /* StringExtensions.swift */,
+				9C74DB9723FFB3E100C3992B /* UIViewControllerExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +271,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CF48C7C23FF24E900E43B10 /* ArticleListCell.xib in Resources */,
+				1CF48C7C23FF24E900E43B10 /* ArticleCell.xib in Resources */,
 				1CF48C5023FEEAB800E43B10 /* LaunchScreen.storyboard in Resources */,
 				1CF48C4D23FEEAB800E43B10 /* Assets.xcassets in Resources */,
 				1CF48C4B23FEEAB700E43B10 /* Main.storyboard in Resources */,
@@ -313,13 +327,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1CF48C7B23FF24E900E43B10 /* ArticleListCell.swift in Sources */,
+				1CF48C7B23FF24E900E43B10 /* ArticleCell.swift in Sources */,
 				1CF48C5A23FEEB5300E43B10 /* Article.swift in Sources */,
 				1CF48C6E23FEF6E000E43B10 /* Constants.swift in Sources */,
 				1CF48C6723FEECE000E43B10 /* ArticleListViewModel.swift in Sources */,
+				9C74DB9823FFB3E100C3992B /* UIViewControllerExtensions.swift in Sources */,
 				1CF48C7023FEFF4200E43B10 /* Networking.swift in Sources */,
 				1CF48C4823FEEAB700E43B10 /* ArticleListViewController.swift in Sources */,
-				1CF48C7623FF1F5200E43B10 /* Extension+String.swift in Sources */,
+				9C74DB9523FFB13700C3992B /* ArticleCellViewModel.swift in Sources */,
+				1CF48C7623FF1F5200E43B10 /* StringExtensions.swift in Sources */,
 				1CF48C6023FEEBDF00E43B10 /* ArticleViewController.swift in Sources */,
 				1CF48C6C23FEF3B700E43B10 /* ArticleAPIError.swift in Sources */,
 				1CF48C7223FF082600E43B10 /* ArticleResponse.swift in Sources */,

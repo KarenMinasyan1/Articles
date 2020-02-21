@@ -7,7 +7,7 @@ target 'Articles' do
 
   # Pods for Articles
 
-pod "Kingfisher", '~> 5.13' #https://github.com/onevcat/Kingfisher
+pod "Kingfisher" #https://github.com/onevcat/Kingfisher
 pod "FLEX"
 
 end

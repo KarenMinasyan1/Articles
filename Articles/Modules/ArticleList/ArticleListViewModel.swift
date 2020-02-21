@@ -16,11 +16,13 @@ protocol ArticleListViewModelInput {
     func articleSelected(index: Int)
     func loadMoreArticles()
     func resetArticles()
+    func getArticleCellViewModel(index: Int) -> ArticleCellViewModel
+    func getArticlesCount() -> Int
 }
 
 class ArticleListViewModel: ViewModel {
     weak var delegate: ArticleListViewModelDelegate?
-    var articles = [Article]()
+    private var articles = [Article]()
     private var page = 1
     
     private func loadArticles() {
@@ -57,5 +59,13 @@ extension ArticleListViewModel: ArticleListViewModelInput {
     func resetArticles() {
         page = 1
         loadArticles()
+    }
+    
+    func getArticleCellViewModel(index: Int) -> ArticleCellViewModel {
+        ArticleCellViewModel(article: articles[index], provider: provider)
+    }
+    
+    func getArticlesCount() -> Int {
+        articles.count
     }
 }

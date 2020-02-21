@@ -11,26 +11,33 @@ import UIKit
 class ArticleListViewController: UITableViewController {
 
     var viewModel: ArticleListViewModel!
-    var dataSource = [Article]()
     var reachedBottom = false
+    let spinner = UIActivityIndicatorView(style: .medium)
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
-        viewModel = ArticleListViewModel(provider: ArticlesProvider())
         viewModel.delegate = self
         viewModel.resetArticles()
+        setupTableView()
         refreshControl?.beginRefreshing()
     }
     
+    // MARK: Table view configurations
     func setupTableView() {
-        tableView.register(UINib(nibName: "ArticleListCell", bundle: nil), forCellReuseIdentifier: ArticleListCell.reuseID)
+        tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: ArticleCell.reuseID)
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
-        let spinner = UIActivityIndicatorView(style: .medium)
         tableView.tableFooterView = spinner
         tableView.tableFooterView?.isHidden = true
+    }
+    
+    // MARK: - UI
+    func stopActivities() {
+        refreshControl?.endRefreshing()
+        tableView.tableFooterView?.isHidden = true
+        reachedBottom = false
+        spinner.stopAnimating()
     }
     
     // MARK: - Table view data source
@@ -39,12 +46,12 @@ class ArticleListViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return viewModel.getArticlesCount()
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleListCell.reuseID, for: indexPath) as! ArticleListCell
-        cell.setupWith(article: dataSource[indexPath.row])
+        let cell = tableView.dequeueReusableCell(withIdentifier: ArticleCell.reuseID, for: indexPath) as! ArticleCell
+        cell.setupWith(viewModel: viewModel.getArticleCellViewModel(index: indexPath.row))
         return cell
     }
 
@@ -55,6 +62,7 @@ class ArticleListViewController: UITableViewController {
         if indexPath.section ==  lastSectionIndex && indexPath.row == lastRowIndex {
             reachedBottom = true
             tableView.tableFooterView?.isHidden = false
+            spinner.startAnimating()
             viewModel.loadMoreArticles()
         }
     }
@@ -79,17 +87,16 @@ class ArticleListViewController: UITableViewController {
 extension ArticleListViewController: ArticleListViewModelDelegate {
     func articleListViewModelDidReceive(articles: [Article]) {
         DispatchQueue.main.async {
-            self.refreshControl?.endRefreshing()
-            self.tableView.tableFooterView?.isHidden = true
-            self.reachedBottom = false
-            
-            self.dataSource = articles
+            self.stopActivities()
             self.tableView.reloadData()
         }
     }
     
     func articleListViewModelDidReceive(error: ArticleAPIError) {
-        // show alertView
+        DispatchQueue.main.async {
+            self.show(error: error)
+            self.stopActivities()
+        }
     }
     
     func articleListViewModelDidCreate(viewModel: ArticleViewModel) {
