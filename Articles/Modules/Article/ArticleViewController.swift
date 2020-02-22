@@ -60,6 +60,23 @@ class ArticleViewController: UIViewController {
         }
     }
     
+    func getHighlightedString(with text: String, key: String, color: UIColor = Constants.UI.textHighlightColor) -> NSAttributedString {
+        let attributed = NSMutableAttributedString(string: text)
+        do {
+            // Putting \b before and after the search pattern will turn it into a whole word search (that is, the pattern “\bcat\b” will match only the word “cat,” but not “catch”)
+            let regex = try NSRegularExpression(pattern: "\\b\(key)\\b", options: [.caseInsensitive])
+            let results = regex.matches(in: text, range: NSRange(text.startIndex..., in: text))
+            
+            for match in results {
+                attributed.addAttribute(NSAttributedString.Key.backgroundColor, value: color, range: match.range)
+            }
+        } catch let error {
+            print("invalid regex: \(error.localizedDescription)")
+        }
+        
+        return attributed
+    }
+    
     func animatingView(_ animating: Bool) {
         activityView.isHidden = !animating
         animating ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
@@ -76,7 +93,8 @@ extension ArticleViewController: ArticleViewModelDelegate {
     }
     
     func articleViewModel(_ viewModel: ArticleViewModel, didSelectTopWord word: String) {
-        bodyTextLabel.attributedText = viewModel.getBodyText()?.getHighlightedAttributedString(with: word)
+        guard let bodyText = viewModel.getBodyText() else { return }
+        bodyTextLabel.attributedText = getHighlightedString(with: bodyText, key: word)
     }
     
     func articleViewModel(_ viewmodel: ArticleViewModel, didReceiveError error: ArticleAPIError) {

@@ -40,9 +40,35 @@ class ArticleViewModel: ViewModel {
     }
     
     private func setup(article: Article) {
-        tags = article.webTitle?.wordsSet.sorted()
-        topWords = article.fields?.bodyText?.wordCountDictionaty().filter { $0.value >= Constants.topWordLimit }.map { ($0, $1) }.sorted(by: { $0.1 > $1.1 })
+        if let bodyText = article.fields?.bodyText {
+            topWords = wordCountDictionaty(text: bodyText).filter { $0.value >= Constants.topWordLimit }.map { ($0, $1) }.sorted(by: { $0.1 > $1.1 })
+        }
+        
+        if let title = article.webTitle {
+            tags = wordsArray(text: title).uniques
+        }
+        
         delegate?.articleViewModelDidReceiveArticle(self)
+    }
+    
+    // The method returns a dictionary with key: word and value: count
+    private func wordCountDictionaty(text: String) -> [String: Int] {
+        let words = self.wordsArray(text: text)
+        var wordDictionary = [String: Int]()
+        for word in words {
+            if let count = wordDictionary[word] {
+                wordDictionary[word] = count + 1
+            } else {
+                wordDictionary[word] = 1
+            }
+        }
+        return wordDictionary
+    }
+    
+    // "wordsArray" returns an array with all words in the string
+    // One letter strings (A, é, ϴ, a) are ignored
+    private func wordsArray(text: String) -> [String] {
+        text.split { !$0.isLetter }.map { String($0.lowercased()) }.filter { $0.count > 1 }
     }
 }
 
