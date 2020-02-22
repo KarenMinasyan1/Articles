@@ -151,8 +151,8 @@
 		1CF48C5723FEEACD00E43B10 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				1CF48C5C23FEEB7D00E43B10 /* Article */,
 				1CF48C5B23FEEB7200E43B10 /* ArticleList */,
+				1CF48C5C23FEEB7D00E43B10 /* Article */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -540,6 +540,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7PRF59H28;
 				INFOPLIST_FILE = Articles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -559,6 +560,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7PRF59H28;
 				INFOPLIST_FILE = Articles/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -19,14 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "ArticleListVC") as! ArticleListViewController
-        controller.viewModel = ArticleListViewModel(provider: ArticlesProvider())
-        let navigation = UINavigationController(rootViewController: controller)
-        window.rootViewController = navigation
-        
-        self.window = window
-        window.makeKeyAndVisible()
+        if let controller = UIStoryboard.main.instantiateViewController(withIdentifier: "ArticleListVC") as? ArticleListViewController {
+            controller.viewModel = ArticleListViewModel(provider: ArticlesProvider())
+            let navigation = UINavigationController(rootViewController: controller)
+            window.rootViewController = navigation
+            
+            self.window = window
+            window.makeKeyAndVisible()
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

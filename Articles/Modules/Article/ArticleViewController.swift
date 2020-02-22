@@ -104,6 +104,14 @@ extension ArticleViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - Collection view delegate
+extension ArticleViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let tagText = viewModel.getTagText(index: indexPath.row)
+        print("Tag selected: \(tagText)")
+    }
+}
+
 // MARK: - Collection view flow layout
 extension ArticleViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

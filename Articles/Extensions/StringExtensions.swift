@@ -28,8 +28,8 @@ extension String {
     }
     
     // The method returns a dictionary with key: word and value: count
-    func wordCount() -> [String: Int] {
-        let words = self.words
+    func wordCountDictionaty() -> [String: Int] {
+        let words = self.wordsArray
         var wordDictionary = [String: Int]()
         for word in words {
             if let count = wordDictionary[word] {
@@ -41,9 +41,9 @@ extension String {
         return wordDictionary
     }
     
-    // "words" returns an array with all words in the string
+    // "wordsArray" returns an array with all words in the string
     // One letter strings (A, é, ϴ, a) are ignored
-    var words: [String] {
+    var wordsArray: [String] {
         split { !$0.isLetter }.map { String($0.lowercased()) }.filter { $0.count > 1 }
     }
 }
