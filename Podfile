@@ -9,6 +9,5 @@ target 'Articles' do
 
   # Swift library for downloading and caching images from the web.
 pod "Kingfisher" # https://github.com/onevcat/Kingfisher
-pod "FLEX"
 
 end
