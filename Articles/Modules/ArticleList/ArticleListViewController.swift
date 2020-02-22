@@ -13,7 +13,7 @@ class ArticleListViewController: UITableViewController {
     var viewModel: ArticleListViewModel!
     var reachedBottom = false
     let spinner = UIActivityIndicatorView(style: .medium)
-    let articleCellHeight = CGFloat(110)
+    let articleCellHeight = CGFloat(92)
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -86,23 +86,22 @@ class ArticleListViewController: UITableViewController {
 
 // MARK: - ViewModel output
 extension ArticleListViewController: ArticleListViewModelDelegate {
-    func articleListViewModelDidReceive(articles: [Article]) {
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceive articles: [Article]) {
         DispatchQueue.main.async {
             self.stopActivities()
             self.tableView.reloadData()
         }
     }
     
-    func articleListViewModelDidReceive(error: ArticleAPIError) {
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceive error: ArticleAPIError) {
         DispatchQueue.main.async {
             self.show(error: error)
             self.stopActivities()
         }
     }
     
-    func articleListViewModelDidCreate(viewModel: ArticleViewModel) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let viewController = storyboard.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController {
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didCreate viewModel: ArticleViewModel) {
+        if let viewController = UIStoryboard.main.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController {
             viewController.viewModel = viewModel
             navigationController?.pushViewController(viewController, animated: true)
         }

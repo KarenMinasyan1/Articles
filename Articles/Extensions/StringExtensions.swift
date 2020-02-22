@@ -10,7 +10,7 @@ import UIKit
 
 extension String {
     // The method returns an NSAttributedString with highlited keys
-    func getHighlightedAttributedString(with key: String, color: UIColor = .yellow) -> NSAttributedString {
+    func getHighlightedAttributedString(with key: String, color: UIColor = Constants.UI.textHighlightColor) -> NSAttributedString {
         let attributed = NSMutableAttributedString(string: self)
         do {
             // Putting \b before and after the search pattern will turn it into a whole word search (that is, the pattern “\bcat\b” will match only the word “cat,” but not “catch”)

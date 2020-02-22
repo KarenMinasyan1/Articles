@@ -9,9 +9,9 @@
 import UIKit
 
 protocol ArticleViewModelDelegate: AnyObject {
-    func articleViewModelDidReceive(details: ArticleDetails)
-    func articleViewModelDidUpdate(bodyText: NSAttributedString)
-    func articleViewModelDidReceive(error: ArticleAPIError)
+    func articleViewModel(_ viewmodel: ArticleViewModel, didReceive details: ArticleDetails)
+    func articleViewModel(_ viewmodel: ArticleViewModel, didUpdate bodyText: NSAttributedString)
+    func articleViewModel(_ viewmodel: ArticleViewModel, didReceive error: ArticleAPIError)
 }
 
 protocol ArticleViewModelInput {
@@ -37,13 +37,14 @@ class ArticleViewModel: ViewModel {
 extension ArticleViewModel: ArticleViewModelInput {
     func loadArticle() {
         provider.getArticle(id: articleID) { [weak self] (result, error) in
+            guard let `self` = self else { return }
             if let error = error {
-                self?.delegate?.articleViewModelDidReceive(error: error)
+                self.delegate?.articleViewModel(self, didReceive: error)
             } else if let article = result?.response?.content {
-                self?.article = article
+                self.article = article
                 if let details = article.convertToArticleDetails() {
-                    self?.articleDetails = details
-                    self?.delegate?.articleViewModelDidReceive(details: details)
+                    self.articleDetails = details
+                    self.delegate?.articleViewModel(self, didReceive: details)
                 }
             }
         }
@@ -52,7 +53,7 @@ extension ArticleViewModel: ArticleViewModelInput {
     func topWordSelected(row: Int) {
         guard let key = articleDetails?.topWords?[row].word else { return }
         guard let attributedString = article?.fields?.bodyText?.getHighlightedAttributedString(with: key) else { return }
-        delegate?.articleViewModelDidUpdate(bodyText: attributedString)
+        delegate?.articleViewModel(self, didUpdate: attributedString)
     }
     
     func getTagsCount() -> Int {

@@ -9,18 +9,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleCellReuseID" rowHeight="110" id="KGk-i7-Jjw" customClass="ArticleCell" customModule="Articles" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="343" height="112"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleCellReuseID" rowHeight="88" id="KGk-i7-Jjw" customClass="ArticleCell" customModule="Articles" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="343" height="90"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="343" height="112"/>
+                <rect key="frame" x="0.0" y="0.0" width="343" height="90"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-QK-MAK">
-                        <rect key="frame" x="16" y="16" width="100" height="80"/>
+                        <rect key="frame" x="16" y="16" width="100" height="60"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="8ph-LC-s5m"/>
-                            <constraint firstAttribute="height" constant="80" id="nkz-FT-y9M"/>
+                            <constraint firstAttribute="height" constant="60" id="nkz-FT-y9M"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cfC-wb-XPk">
@@ -34,7 +34,7 @@
                     <constraint firstAttribute="trailing" secondItem="cfC-wb-XPk" secondAttribute="trailing" constant="16" id="NC7-4f-rWA"/>
                     <constraint firstItem="mMd-QK-MAK" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="S3S-8Q-ApP"/>
                     <constraint firstItem="cfC-wb-XPk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="XB9-41-Oq0"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cfC-wb-XPk" secondAttribute="bottom" constant="16" id="hee-8x-Sm4"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cfC-wb-XPk" secondAttribute="bottom" constant="10" id="hee-8x-Sm4"/>
                     <constraint firstItem="mMd-QK-MAK" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="tlb-P3-Tc6"/>
                     <constraint firstItem="cfC-wb-XPk" firstAttribute="leading" secondItem="mMd-QK-MAK" secondAttribute="trailing" constant="16" id="vFR-pp-5K7"/>
                 </constraints>
@@ -44,7 +44,7 @@
                 <outlet property="articleImageView" destination="mMd-QK-MAK" id="OyP-ua-ZjU"/>
                 <outlet property="articleTitleLabel" destination="cfC-wb-XPk" id="feR-WS-afd"/>
             </connections>
-            <point key="canvasLocation" x="132.60869565217394" y="175.44642857142856"/>
+            <point key="canvasLocation" x="132.60869565217394" y="168.08035714285714"/>
         </tableViewCell>
     </objects>
 </document>

@@ -11,11 +11,10 @@ import UIKit
 class ArticleViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-        // tagList
     @IBOutlet weak var tagsCollectionView: UICollectionView!
     @IBOutlet weak var bodyTextLabel: UILabel!
     @IBOutlet weak var topWordsView: UIView!
-    @IBOutlet weak var topWordsStackView: UIStackView!
+    @IBOutlet weak var topWordsStackView: ButtonsStackView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -32,6 +31,7 @@ class ArticleViewController: UIViewController {
         configureUI()
         setupCollectionView()
         viewModel.delegate = self
+        topWordsStackView.delegate = self
         viewModel.loadArticle()
         animatingView(true)
     }
@@ -54,7 +54,7 @@ class ArticleViewController: UIViewController {
         titleLabel.text = details.title
         bodyTextLabel.attributedText = details.bodyText
         categoryLabel.text = details.categoryText
-        imageView.kf.setImage(with: details.imageURL)
+        imageView.kf.setImage(with: details.imageURL, placeholder: UIImage(named: "article_placeholder"))
         dateLabel.text = details.date?.toString()
         tagsCollectionView.reloadData()
         tagsViewHeightConstraint.constant = tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
@@ -63,17 +63,8 @@ class ArticleViewController: UIViewController {
             if topWords.isEmpty {
                 topWordsView.isHidden = true
             } else {
-                update(topWords: topWords)
+                topWordsStackView.setup(with: topWords)
             }
-        }
-    }
-    
-    func update(topWords: [TopWord]) {
-        for i in 0 ..< topWords.count {
-            let button = TopWordButton(topWord: topWords[i])
-            button.tag = i
-            button.addTarget(self, action: #selector(topWordButtonTap(sender:)), for: .touchUpInside)
-            topWordsStackView.addArrangedSubview(button)
         }
     }
     
@@ -81,26 +72,21 @@ class ArticleViewController: UIViewController {
         activityView.isHidden = !animating
         animating ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
     }
-    
-    // MARK: - Actions
-    @objc func topWordButtonTap(sender: UIButton) {
-        viewModel.topWordSelected(row: sender.tag)
-    }
 }
 
 extension ArticleViewController: ArticleViewModelDelegate {
-    func articleViewModelDidReceive(details: ArticleDetails) {
+    func articleViewModel(_ viewmodel: ArticleViewModel, didReceive details: ArticleDetails) {
         DispatchQueue.main.async {
             self.animatingView(false)
             self.update(details: details)
         }
     }
     
-    func articleViewModelDidUpdate(bodyText: NSAttributedString) {
+    func articleViewModel(_ viewmodel: ArticleViewModel, didUpdate bodyText: NSAttributedString) {
         bodyTextLabel.attributedText = bodyText
     }
     
-    func articleViewModelDidReceive(error: ArticleAPIError) {
+    func articleViewModel(_ viewmodel: ArticleViewModel, didReceive error: ArticleAPIError) {
         show(error: error)
     }
 }
@@ -129,5 +115,12 @@ extension ArticleViewController: UICollectionViewDelegateFlowLayout {
         let height = CGFloat(30)
         
         return CGSize(width: width, height: height)
+    }
+}
+
+// MARK: - Buttons stack view delegate
+extension ArticleViewController: ButtonsStackViewDelegate {
+    func buttonsStackView(_ stackView: ButtonsStackView, didSelect row: Int) {
+        viewModel.topWordSelected(row: row)
     }
 }

@@ -7,9 +7,9 @@
 //
 
 protocol ArticleListViewModelDelegate: AnyObject {
-    func articleListViewModelDidReceive(articles: [Article])
-    func articleListViewModelDidReceive(error: ArticleAPIError)
-    func articleListViewModelDidCreate(viewModel: ArticleViewModel)
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceive articles: [Article])
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceive error: ArticleAPIError)
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didCreate viewModel: ArticleViewModel)
 }
 
 protocol ArticleListViewModelInput {
@@ -27,10 +27,11 @@ class ArticleListViewModel: ViewModel {
     
     private func loadArticles() {
         provider.getArticleList(page: page) { [weak self] (result, error) in
+            guard let `self` = self else { return }
             if let error = error {
-                self?.delegate?.articleListViewModelDidReceive(error: error)
+                self.delegate?.articleListViewModel(self, didReceive: error)
             } else if let articles = result?.response?.results {
-                self?.setArticles(value: articles)
+                self.setArticles(value: articles)
             }
         }
     }
@@ -41,14 +42,14 @@ class ArticleListViewModel: ViewModel {
         } else {
             articles += value
         }
-        delegate?.articleListViewModelDidReceive(articles: articles)
+        delegate?.articleListViewModel(self, didReceive: articles)
     }
 }
 
 extension ArticleListViewModel: ArticleListViewModelInput {
     func articleSelected(index: Int) {
         let viewModel = ArticleViewModel(articleID: articles[index].id ?? "", provider: provider)
-        delegate?.articleListViewModelDidCreate(viewModel: viewModel)
+        delegate?.articleListViewModel(self, didCreate: viewModel)
     }
     
     func loadMoreArticles() {

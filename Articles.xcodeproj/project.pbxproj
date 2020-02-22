@@ -11,7 +11,10 @@
 		1C46BA44240113FF0031D962 /* TagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C46BA42240113FF0031D962 /* TagCell.xib */; };
 		1C46BA46240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA45240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift */; };
 		1C46BA4824011E020031D962 /* TagCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA4724011E020031D962 /* TagCellViewModel.swift */; };
-		1CA6186A2400652B0047F3D7 /* TopWordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA618692400652B0047F3D7 /* TopWordButton.swift */; };
+		1C46BA4B24012E030031D962 /* ButtonsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA4A24012E030031D962 /* ButtonsStackView.swift */; };
+		1C46BA4D240148B90031D962 /* UIStoryBoardExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA4C240148B90031D962 /* UIStoryBoardExtensions.swift */; };
+		1C46BA4F24014A7C0031D962 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA4E24014A7C0031D962 /* UIColorExtensions.swift */; };
+		1CA6186A2400652B0047F3D7 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA618692400652B0047F3D7 /* Button.swift */; };
 		1CA6186C240069DC0047F3D7 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6186B240069DC0047F3D7 /* DateExtensions.swift */; };
 		1CF48C4423FEEAB700E43B10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C4323FEEAB700E43B10 /* AppDelegate.swift */; };
 		1CF48C4623FEEAB700E43B10 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C4523FEEAB700E43B10 /* SceneDelegate.swift */; };
@@ -45,7 +48,10 @@
 		1C46BA42240113FF0031D962 /* TagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCell.xib; sourceTree = "<group>"; };
 		1C46BA45240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		1C46BA4724011E020031D962 /* TagCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellViewModel.swift; sourceTree = "<group>"; };
-		1CA618692400652B0047F3D7 /* TopWordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWordButton.swift; sourceTree = "<group>"; };
+		1C46BA4A24012E030031D962 /* ButtonsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsStackView.swift; sourceTree = "<group>"; };
+		1C46BA4C240148B90031D962 /* UIStoryBoardExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryBoardExtensions.swift; sourceTree = "<group>"; };
+		1C46BA4E24014A7C0031D962 /* UIColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		1CA618692400652B0047F3D7 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		1CA6186B240069DC0047F3D7 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		1CF48C4023FEEAB700E43B10 /* Articles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Articles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1CF48C4323FEEAB700E43B10 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,14 +102,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		1C46BA3E240112E70031D962 /* Tag list */ = {
+		1C46BA4924012DE70031D962 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				1C46BA41240113FF0031D962 /* TagCell.swift */,
-				1C46BA42240113FF0031D962 /* TagCell.xib */,
-				1C46BA4724011E020031D962 /* TagCellViewModel.swift */,
+				1C46BA45240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift */,
+				1C46BA4A24012E030031D962 /* ButtonsStackView.swift */,
+				1CA618692400652B0047F3D7 /* Button.swift */,
 			);
-			path = "Tag list";
+			path = UI;
 			sourceTree = "<group>";
 		};
 		1CF48C3723FEEAB700E43B10 = {
@@ -128,9 +134,9 @@
 			isa = PBXGroup;
 			children = (
 				1CF48C5D23FEEB8E00E43B10 /* Application */,
+				1CF48C5E23FEEBA200E43B10 /* Constants */,
 				1CF48C6123FEEC1C00E43B10 /* Common */,
 				9C74DB9623FFB31900C3992B /* Extensions */,
-				1CF48C5E23FEEBA200E43B10 /* Constants */,
 				1CF48C5823FEEB0900E43B10 /* Models */,
 				1CF48C5723FEEACD00E43B10 /* Modules */,
 				1CF48C6823FEEFAC00E43B10 /* Networking */,
@@ -177,10 +183,11 @@
 		1CF48C5C23FEEB7D00E43B10 /* Article */ = {
 			isa = PBXGroup;
 			children = (
-				1C46BA3E240112E70031D962 /* Tag list */,
 				1CF48C5F23FEEBDF00E43B10 /* ArticleViewController.swift */,
 				1CF48C6423FEEC6600E43B10 /* ArticleViewModel.swift */,
-				1CA618692400652B0047F3D7 /* TopWordButton.swift */,
+				1C46BA41240113FF0031D962 /* TagCell.swift */,
+				1C46BA42240113FF0031D962 /* TagCell.xib */,
+				1C46BA4724011E020031D962 /* TagCellViewModel.swift */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -205,8 +212,8 @@
 		1CF48C6123FEEC1C00E43B10 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				1C46BA4924012DE70031D962 /* UI */,
 				1CF48C6223FEEC3E00E43B10 /* ViewModel.swift */,
-				1C46BA45240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -236,6 +243,8 @@
 				1CF48C7523FF1F5200E43B10 /* StringExtensions.swift */,
 				9C74DB9723FFB3E100C3992B /* UIViewControllerExtensions.swift */,
 				1CA6186B240069DC0047F3D7 /* DateExtensions.swift */,
+				1C46BA4C240148B90031D962 /* UIStoryBoardExtensions.swift */,
+				1C46BA4E24014A7C0031D962 /* UIColorExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -357,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1C46BA4F24014A7C0031D962 /* UIColorExtensions.swift in Sources */,
 				1CF48C7B23FF24E900E43B10 /* ArticleCell.swift in Sources */,
 				1CF48C5A23FEEB5300E43B10 /* Article.swift in Sources */,
 				1CF48C6E23FEF6E000E43B10 /* Constants.swift in Sources */,
@@ -372,13 +382,15 @@
 				1CF48C6023FEEBDF00E43B10 /* ArticleViewController.swift in Sources */,
 				1CF48C6C23FEF3B700E43B10 /* ArticleAPIError.swift in Sources */,
 				1CF48C7223FF082600E43B10 /* ArticleResponse.swift in Sources */,
+				1C46BA4B24012E030031D962 /* ButtonsStackView.swift in Sources */,
 				1CF48C4423FEEAB700E43B10 /* AppDelegate.swift in Sources */,
 				1CA6186C240069DC0047F3D7 /* DateExtensions.swift in Sources */,
+				1C46BA4D240148B90031D962 /* UIStoryBoardExtensions.swift in Sources */,
 				1C46BA43240113FF0031D962 /* TagCell.swift in Sources */,
 				1CF48C6323FEEC3E00E43B10 /* ViewModel.swift in Sources */,
 				1CF48C6A23FEEFDA00E43B10 /* ArticlesProvider.swift in Sources */,
 				1CF48C6523FEEC6600E43B10 /* ArticleViewModel.swift in Sources */,
-				1CA6186A2400652B0047F3D7 /* TopWordButton.swift in Sources */,
+				1CA6186A2400652B0047F3D7 /* Button.swift in Sources */,
 				1CF48C4623FEEAB700E43B10 /* SceneDelegate.swift in Sources */,
 				1CF48C7423FF099500E43B10 /* ArticleListResponse.swift in Sources */,
 			);

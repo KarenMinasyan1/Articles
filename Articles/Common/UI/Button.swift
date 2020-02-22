@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TopWordButton: UIButton {
+class Button: UIButton {
 
     convenience init(topWord: TopWord) {
         self.init(frame: CGRect.zero)
