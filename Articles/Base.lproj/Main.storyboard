@@ -49,7 +49,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vkt-an-bPK">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Vkt-an-bPK" customClass="TagsCollectionView" customModule="Articles" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="36.5" width="364" height="100"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
@@ -139,6 +139,7 @@
                                                             <constraint firstItem="Pbt-6X-gyD" firstAttribute="width" secondItem="huf-FI-ZGK" secondAttribute="width" multiplier="0.5" id="Cqv-ju-Esl"/>
                                                             <constraint firstItem="fsB-au-Ba8" firstAttribute="leading" secondItem="Pbt-6X-gyD" secondAttribute="trailing" id="EZD-nV-rEB"/>
                                                             <constraint firstItem="QSG-hN-Icc" firstAttribute="top" secondItem="Pbt-6X-gyD" secondAttribute="bottom" constant="5" id="Ow5-Ae-bbH"/>
+                                                            <constraint firstItem="Pbt-6X-gyD" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="huf-FI-ZGK" secondAttribute="leading" constant="10" id="TVL-6K-smx"/>
                                                             <constraint firstItem="Sdn-FZ-Ahs" firstAttribute="leading" secondItem="QSG-hN-Icc" secondAttribute="trailing" constant="10" id="Te8-Lj-KOv"/>
                                                             <constraint firstItem="QSG-hN-Icc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="huf-FI-ZGK" secondAttribute="leading" constant="10" id="cBX-Y4-UrW"/>
                                                             <constraint firstItem="fsB-au-Ba8" firstAttribute="top" secondItem="huf-FI-ZGK" secondAttribute="top" constant="20" id="dvp-ka-KKr"/>

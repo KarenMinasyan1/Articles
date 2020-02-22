@@ -46,5 +46,9 @@ extension String {
     var wordsArray: [String] {
         split { !$0.isLetter }.map { String($0.lowercased()) }.filter { $0.count > 1 }
     }
+    
+    var wordsSet: Set<String> {
+        Set(wordsArray)
+    }
 }
 

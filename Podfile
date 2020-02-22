@@ -7,7 +7,8 @@ target 'Articles' do
 
   # Pods for Articles
 
-pod "Kingfisher" #https://github.com/onevcat/Kingfisher
+  # Swift library for downloading and caching images from the web.
+pod "Kingfisher" # https://github.com/onevcat/Kingfisher
 pod "FLEX"
 
 end

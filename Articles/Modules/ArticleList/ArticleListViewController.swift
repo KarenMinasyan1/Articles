@@ -31,7 +31,6 @@ class ArticleListViewController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         tableView.tableFooterView = spinner
         tableView.tableFooterView?.isHidden = true
-        tableView.rowHeight = articleCellHeight
     }
     
     // MARK: - UI
@@ -73,11 +72,6 @@ class ArticleListViewController: UITableViewController {
         viewModel.articleSelected(index: indexPath.row)
     }
     
-    // MARK: - Navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-    }
-    
     // MARK: - Actions
     @objc func refreshAction() {
         viewModel.resetArticles()
@@ -86,21 +80,21 @@ class ArticleListViewController: UITableViewController {
 
 // MARK: - ViewModel output
 extension ArticleListViewController: ArticleListViewModelDelegate {
-    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceive articles: [Article]) {
+    func articleListViewModelDidReceiveArticles(_ viewmodel: ArticleListViewModel) {
         DispatchQueue.main.async {
             self.stopActivities()
             self.tableView.reloadData()
         }
     }
     
-    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceive error: ArticleAPIError) {
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceiveError error: ArticleAPIError) {
         DispatchQueue.main.async {
             self.show(error: error)
             self.stopActivities()
         }
     }
     
-    func articleListViewModel(_ viewmodel: ArticleListViewModel, didCreate viewModel: ArticleViewModel) {
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didSelectArticle viewModel: ArticleViewModel) {
         if let viewController = UIStoryboard.main.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController {
             viewController.viewModel = viewModel
             navigationController?.pushViewController(viewController, animated: true)

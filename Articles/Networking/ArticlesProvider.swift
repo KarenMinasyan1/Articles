@@ -19,7 +19,7 @@ class ArticlesProvider: ArticleAPI {
     /// - Parameters:
     ///   - page: articles page
     func getArticleList(page: Int, completion: @escaping (ArticleListResponse?, ArticleAPIError?) -> ()) {
-        let params = ["page": String(page), "show-fields": "thumbnail", "api-key": Constants.apiKey]
+        let params = ["page": String(page), "show-fields": "thumbnail", "page-size": "\(Constants.pageSize)", "api-key": Constants.apiKey]
         Networking.makeNetworkRequest(url: Constants.baseURL, path: "/search", params: params, responseType: ArticleListResponse.self, completion: completion)
     }
     
@@ -27,7 +27,7 @@ class ArticlesProvider: ArticleAPI {
     /// - Parameters:
     ///   - id: The article id
     func getArticle(id: String, completion: @escaping (ArticleResponse?, ArticleAPIError?) -> ()) {
-        let params = ["show-fields": "thumbnail,bodyText,headline", "api-key": Constants.apiKey]
+        let params = ["show-fields": "thumbnail,bodyText,headline", "page-size": "\(Constants.pageSize)", "api-key": Constants.apiKey]
         Networking.makeNetworkRequest(url: Constants.baseURL, path: "/\(id)", params: params, responseType: ArticleResponse.self, completion: completion)
     }
 }

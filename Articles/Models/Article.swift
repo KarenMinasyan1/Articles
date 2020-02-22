@@ -8,6 +8,8 @@
 
 import Foundation
 
+typealias TopWord = (word: String, count: Int)
+
 struct Article: Codable {
     let apiUrl: String?
     let fields: Field?
@@ -27,19 +29,4 @@ struct Field: Codable {
     let bodyText: String?
     let thumbnail: String?
     let headline: String?
-}
-
-extension Article {
-    func convertToArticleDetails() -> ArticleDetails? {
-        // casting an array to a set to remove recurring words
-        let tags = Set<String>(webTitle?.wordsArray ?? [])
-        // creating an URL from string
-        let imageURL = URL(string: fields?.thumbnail ?? "")
-        // creating an attributed string from the articles body text
-        let bodyText = NSMutableAttributedString(string: fields?.bodyText ?? "")
-        // generating a dictionary from the string (word: count), filtering elements with condition of count > 10, mapping to an array of TopWords and sorting as descending
-        let topWords = fields?.bodyText?.wordCountDictionaty().filter { $0.value >= Constants.topWordLimit }.map { ($0, $1) }.sorted(by: { $0.1 > $1.1 })
-        
-        return ArticleDetails(title: webTitle, tags: tags, bodyText: bodyText, topWords: topWords, categoryText: fields?.headline, date: webPublicationDate, imageURL: imageURL)
-    }
 }

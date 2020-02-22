@@ -6,8 +6,6 @@
 //  Copyright © 2020 KarenMinasyan. All rights reserved.
 //
 
-import UIKit
-
 class TagCellViewModel: ViewModel {
     private var tagText: String
     

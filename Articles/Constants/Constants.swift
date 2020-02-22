@@ -12,7 +12,8 @@ import UIKit
 struct Constants {
     static let baseURL = "https://content.guardianapis.com"
     static let apiKey = "fa66fe25-f55e-4c25-b3f4-5288725654e2"
-    static let topWordLimit = 10
+    static let topWordLimit = 10 // If words count in an article exceeded the limit the word goes to TopWords
+    static let pageSize = 20 // Articles per page
     
     struct UI {
         static let textHighlightColor = UIColor.yellow

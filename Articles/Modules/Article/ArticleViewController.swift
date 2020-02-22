@@ -11,7 +11,7 @@ import UIKit
 class ArticleViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var tagsCollectionView: UICollectionView!
+    @IBOutlet weak var tagsCollectionView: TagsCollectionView!
     @IBOutlet weak var bodyTextLabel: UILabel!
     @IBOutlet weak var topWordsView: UIView!
     @IBOutlet weak var topWordsStackView: ButtonsStackView!
@@ -29,19 +29,10 @@ class ArticleViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
-        setupCollectionView()
         viewModel.delegate = self
         topWordsStackView.delegate = self
         viewModel.loadArticle()
         animatingView(true)
-    }
-    
-    // MARK: - Setup Collection View
-    func setupCollectionView() {
-        tagsCollectionView.delegate = self
-        tagsCollectionView.dataSource = self
-        tagsCollectionView.collectionViewLayout = LeftAlignedCollectionViewFlowLayout()
-        tagsCollectionView.register(UINib(nibName: "TagCell", bundle: nil), forCellWithReuseIdentifier: TagCell.reuseID)
     }
     
     // MARK: - UI
@@ -50,21 +41,22 @@ class ArticleViewController: UIViewController {
         imageView.clipsToBounds = true
     }
     
-    func update(details: ArticleDetails) {
-        titleLabel.text = details.title
-        bodyTextLabel.attributedText = details.bodyText
-        categoryLabel.text = details.categoryText
-        imageView.kf.setImage(with: details.imageURL, placeholder: UIImage(named: "article_placeholder"))
-        dateLabel.text = details.date?.toString()
+    func updateUI() {
+        titleLabel.text = viewModel.getTitle()
+        bodyTextLabel.attributedText = NSAttributedString(string: viewModel.getBodyText() ?? "")
+        categoryLabel.text = viewModel.getHeadline()
+        imageView.kf.setImage(with: viewModel.getImageURL(), placeholder: UIImage(named: "article_placeholder"))
+        dateLabel.text = viewModel.getDate()?.toString()
+        
+        tagsCollectionView.setup(viewModel: viewModel.getTagsCollectionViewModel())
         tagsCollectionView.reloadData()
         tagsViewHeightConstraint.constant = tagsCollectionView.collectionViewLayout.collectionViewContentSize.height
         
-        if let topWords = details.topWords {
-            if topWords.isEmpty {
-                topWordsView.isHidden = true
-            } else {
-                topWordsStackView.setup(with: topWords)
-            }
+        let topWords = viewModel.getTopWords()
+        if topWords.isEmpty {
+            topWordsView.isHidden = true
+        } else {
+            topWordsStackView.setup(with: topWords)
         }
     }
     
@@ -74,61 +66,27 @@ class ArticleViewController: UIViewController {
     }
 }
 
+// MARK: - Article viewModel delegate
 extension ArticleViewController: ArticleViewModelDelegate {
-    func articleViewModel(_ viewmodel: ArticleViewModel, didReceive details: ArticleDetails) {
+    func articleViewModelDidReceiveArticle(_ viewModel: ArticleViewModel) {
         DispatchQueue.main.async {
             self.animatingView(false)
-            self.update(details: details)
+            self.updateUI()
         }
     }
     
-    func articleViewModel(_ viewmodel: ArticleViewModel, didUpdate bodyText: NSAttributedString) {
-        bodyTextLabel.attributedText = bodyText
+    func articleViewModel(_ viewModel: ArticleViewModel, didSelectTopWord word: String) {
+        bodyTextLabel.attributedText = viewModel.getBodyText()?.getHighlightedAttributedString(with: word)
     }
     
-    func articleViewModel(_ viewmodel: ArticleViewModel, didReceive error: ArticleAPIError) {
+    func articleViewModel(_ viewmodel: ArticleViewModel, didReceiveError error: ArticleAPIError) {
         show(error: error)
-    }
-}
-
-// MARK: - Collection view data source
-extension ArticleViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.getTagsCount()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TagCell.reuseID, for: indexPath) as? TagCell else { return UICollectionViewCell() }
-        cell.setup(viewModel: viewModel.getTagCellViewModel(index: indexPath.row))
-        return cell
-    }
-}
-
-// MARK: - Collection view delegate
-extension ArticleViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let tagText = viewModel.getTagText(index: indexPath.row)
-        print("Tag selected: \(tagText)")
-    }
-}
-
-// MARK: - Collection view flow layout
-extension ArticleViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let name = viewModel.getTagText(index: indexPath.row)
-
-        let textSize = name.boundingRect(with: collectionView.frame.size, options: [], attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 25)], context: nil).size
-        
-        let width = (textSize.width  > collectionView.frame.size.width) ? collectionView.frame.size.width : textSize.width
-        let height = CGFloat(30)
-        
-        return CGSize(width: width, height: height)
     }
 }
 
 // MARK: - Buttons stack view delegate
 extension ArticleViewController: ButtonsStackViewDelegate {
     func buttonsStackView(_ stackView: ButtonsStackView, didSelect row: Int) {
-        viewModel.topWordSelected(row: row)
+        viewModel.selectTopWord(row: row)
     }
 }
