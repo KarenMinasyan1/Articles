@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1C46BA43240113FF0031D962 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA41240113FF0031D962 /* TagCell.swift */; };
+		1C46BA44240113FF0031D962 /* TagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1C46BA42240113FF0031D962 /* TagCell.xib */; };
+		1C46BA46240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA45240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift */; };
+		1C46BA4824011E020031D962 /* TagCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1C46BA4724011E020031D962 /* TagCellViewModel.swift */; };
 		1CA6186A2400652B0047F3D7 /* TopWordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA618692400652B0047F3D7 /* TopWordButton.swift */; };
 		1CA6186C240069DC0047F3D7 /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CA6186B240069DC0047F3D7 /* DateExtensions.swift */; };
 		1CF48C4423FEEAB700E43B10 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CF48C4323FEEAB700E43B10 /* AppDelegate.swift */; };
@@ -37,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		078027ADA223D8E6BABA55A8 /* Pods_Articles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Articles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C46BA41240113FF0031D962 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		1C46BA42240113FF0031D962 /* TagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCell.xib; sourceTree = "<group>"; };
+		1C46BA45240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftAlignedCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		1C46BA4724011E020031D962 /* TagCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCellViewModel.swift; sourceTree = "<group>"; };
 		1CA618692400652B0047F3D7 /* TopWordButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopWordButton.swift; sourceTree = "<group>"; };
 		1CA6186B240069DC0047F3D7 /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 		1CF48C4023FEEAB700E43B10 /* Articles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Articles.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -86,6 +94,16 @@
 				078027ADA223D8E6BABA55A8 /* Pods_Articles.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		1C46BA3E240112E70031D962 /* Tag list */ = {
+			isa = PBXGroup;
+			children = (
+				1C46BA41240113FF0031D962 /* TagCell.swift */,
+				1C46BA42240113FF0031D962 /* TagCell.xib */,
+				1C46BA4724011E020031D962 /* TagCellViewModel.swift */,
+			);
+			path = "Tag list";
 			sourceTree = "<group>";
 		};
 		1CF48C3723FEEAB700E43B10 = {
@@ -159,6 +177,7 @@
 		1CF48C5C23FEEB7D00E43B10 /* Article */ = {
 			isa = PBXGroup;
 			children = (
+				1C46BA3E240112E70031D962 /* Tag list */,
 				1CF48C5F23FEEBDF00E43B10 /* ArticleViewController.swift */,
 				1CF48C6423FEEC6600E43B10 /* ArticleViewModel.swift */,
 				1CA618692400652B0047F3D7 /* TopWordButton.swift */,
@@ -187,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				1CF48C6223FEEC3E00E43B10 /* ViewModel.swift */,
+				1C46BA45240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -281,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1CF48C7C23FF24E900E43B10 /* ArticleCell.xib in Resources */,
+				1C46BA44240113FF0031D962 /* TagCell.xib in Resources */,
 				1CF48C5023FEEAB800E43B10 /* LaunchScreen.storyboard in Resources */,
 				1CF48C4D23FEEAB800E43B10 /* Assets.xcassets in Resources */,
 				1CF48C4B23FEEAB700E43B10 /* Main.storyboard in Resources */,
@@ -343,7 +364,9 @@
 				9C74DB9823FFB3E100C3992B /* UIViewControllerExtensions.swift in Sources */,
 				1CF48C7023FEFF4200E43B10 /* Networking.swift in Sources */,
 				9CA7380023FFD36800070767 /* ArticleDetails.swift in Sources */,
+				1C46BA46240115180031D962 /* LeftAlignedCollectionViewFlowLayout.swift in Sources */,
 				1CF48C4823FEEAB700E43B10 /* ArticleListViewController.swift in Sources */,
+				1C46BA4824011E020031D962 /* TagCellViewModel.swift in Sources */,
 				9C74DB9523FFB13700C3992B /* ArticleCellViewModel.swift in Sources */,
 				1CF48C7623FF1F5200E43B10 /* StringExtensions.swift in Sources */,
 				1CF48C6023FEEBDF00E43B10 /* ArticleViewController.swift in Sources */,
@@ -351,6 +374,7 @@
 				1CF48C7223FF082600E43B10 /* ArticleResponse.swift in Sources */,
 				1CF48C4423FEEAB700E43B10 /* AppDelegate.swift in Sources */,
 				1CA6186C240069DC0047F3D7 /* DateExtensions.swift in Sources */,
+				1C46BA43240113FF0031D962 /* TagCell.swift in Sources */,
 				1CF48C6323FEEC3E00E43B10 /* ViewModel.swift in Sources */,
 				1CF48C6A23FEEFDA00E43B10 /* ArticlesProvider.swift in Sources */,
 				1CF48C6523FEEC6600E43B10 /* ArticleViewModel.swift in Sources */,

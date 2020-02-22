@@ -10,6 +10,11 @@ import UIKit
 
 class TopWordButton: UIButton {
 
+    convenience init(topWord: TopWord) {
+        self.init(frame: CGRect.zero)
+        setup(topWord: topWord)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         makeUI()

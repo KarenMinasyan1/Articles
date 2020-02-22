@@ -17,6 +17,9 @@ protocol ArticleViewModelDelegate: AnyObject {
 protocol ArticleViewModelInput {
     func loadArticle()
     func topWordSelected(row: Int)
+    func getTagsCount() -> Int
+    func getTagCellViewModel(index: Int) -> TagCellViewModel
+    func getTagText(index: Int) -> String
 }
 
 class ArticleViewModel: ViewModel {
@@ -50,5 +53,17 @@ extension ArticleViewModel: ArticleViewModelInput {
         guard let key = articleDetails?.topWords?[row].word else { return }
         guard let attributedString = article?.fields?.bodyText?.getHighlightedAttributedString(with: key) else { return }
         delegate?.articleViewModelDidUpdate(bodyText: attributedString)
+    }
+    
+    func getTagsCount() -> Int {
+        articleDetails?.tags.count ?? 0
+    }
+    
+    func getTagCellViewModel(index: Int) -> TagCellViewModel {
+        TagCellViewModel(tagText: getTagText(index: index), provider: provider)
+    }
+    
+    func getTagText(index: Int) -> String {
+        articleDetails?.tags.sorted()[index] ?? ""
     }
 }

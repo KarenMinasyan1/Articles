@@ -13,6 +13,7 @@ class ArticleListViewController: UITableViewController {
     var viewModel: ArticleListViewModel!
     var reachedBottom = false
     let spinner = UIActivityIndicatorView(style: .medium)
+    let articleCellHeight = CGFloat(110)
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
@@ -30,6 +31,7 @@ class ArticleListViewController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         tableView.tableFooterView = spinner
         tableView.tableFooterView?.isHidden = true
+        tableView.rowHeight = articleCellHeight
     }
     
     // MARK: - UI
