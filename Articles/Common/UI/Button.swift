@@ -26,7 +26,7 @@ class Button: UIButton {
     }
     
     private func makeUI() {
-        setTitleColor(.blue, for: .normal)
+        setTitleColor(.darkBlue, for: .normal)
     }
     
     func setup(topWord: TopWord) {

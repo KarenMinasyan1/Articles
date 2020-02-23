@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "hO_6R8Mkiec.jpg",
+      "filename" : "icons8-police-badge-48.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icons8-police-badge-49.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icons8-police-badge-50.png",
       "scale" : "3x"
     }
   ],

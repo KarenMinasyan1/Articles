@@ -9,25 +9,33 @@
 import Foundation
 
 class Networking {
-    static func makeNetworkRequest<T: Codable>(url: String, path: String, params: [String: String], responseType: T.Type, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .formatted(Formatter.iso8601), completion: @escaping (T?, ArticleAPIError?) -> Void)
+    static func getRequest<T: Codable>(url: String, path: String, params: [String: String], responseType: T.Type, dateDecodingStrategy: JSONDecoder.DateDecodingStrategy = .formatted(Formatter.iso8601), completion: @escaping (T?, Error?) -> Void)
     {
         var urlComponents = URLComponents(string: url)
         urlComponents?.path = path
         urlComponents?.setQueryItems(with: params)
         
         guard let url = urlComponents?.url else {
-            completion(nil, ArticleAPIError.requestError(message: ""))
+            completion(nil, AppError.wrongURL)
             return
         }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             do {
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = dateDecodingStrategy
-                let responseModel = try decoder.decode(T.self, from: data!)
-                completion(responseModel, nil)
+                if let error = error {
+                    completion(nil, error)
+                    print(error.localizedDescription)
+                    return
+                }
+                if let data = data {
+                    let decoder = JSONDecoder()
+                    decoder.dateDecodingStrategy = dateDecodingStrategy
+                    let responseModel = try decoder.decode(T.self, from: data)
+                    completion(responseModel, nil)
+                }
             } catch let error {
-                completion(nil, ArticleAPIError.requestError(message: error.localizedDescription))
+                completion(nil, error)
+                print(error.localizedDescription)
                 return
             }
         }.resume()

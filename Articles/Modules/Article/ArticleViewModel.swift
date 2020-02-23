@@ -8,12 +8,14 @@
 
 import UIKit
 
+// MARK: - Article viewModel Delegate
 protocol ArticleViewModelDelegate: AnyObject {
     func articleViewModelDidReceiveArticle(_ viewModel: ArticleViewModel)
     func articleViewModel(_ viewModel: ArticleViewModel, didSelectTopWord word: String)
-    func articleViewModel(_ viewModel: ArticleViewModel, didReceiveError error: ArticleAPIError)
+    func articleViewModel(_ viewModel: ArticleViewModel, didReceiveError error: AppError)
 }
 
+// MARK: - Article viewModel input protocol
 protocol ArticleViewModelInput {
     func loadArticle()
     func selectTopWord(row: Int)
@@ -31,8 +33,8 @@ class ArticleViewModel: ViewModel {
     private var article: Article?
     weak var delegate: ArticleViewModelDelegate?
     
-    private var tags: [String]?
-    private var topWords: [TopWord]?
+    private var tags: [String]? // Tags are being generated from the article title text
+    private var topWords: [TopWord]? // Top words are being generated from the article body text
     
     init(articleID: String, provider: ArticleAPI) {
         self.articleID = articleID
@@ -41,19 +43,23 @@ class ArticleViewModel: ViewModel {
     
     private func setup(article: Article) {
         if let bodyText = article.fields?.bodyText {
+            // Create a dictionary from body text, filter values with condition count > limit, map to topWord array and sort as descending
             topWords = wordCountDictionaty(text: bodyText).filter { $0.value >= Constants.topWordLimit }.map { ($0, $1) }.sorted(by: { $0.1 > $1.1 })
         }
         
         if let title = article.webTitle {
-            tags = wordsArray(text: title).uniques
+            // Split the title, filter duplicates and letters
+            tags = title.words().uniques.filter { $0.count > 1 }
         }
         
         delegate?.articleViewModelDidReceiveArticle(self)
     }
     
-    // The method returns a dictionary with key: word and value: count
+    // The method returns a dictionary
+    // The keys are words in the string
+    // The values are the words count in the string
     private func wordCountDictionaty(text: String) -> [String: Int] {
-        let words = self.wordsArray(text: text)
+        let words = text.words()
         var wordDictionary = [String: Int]()
         for word in words {
             if let count = wordDictionary[word] {
@@ -64,22 +70,16 @@ class ArticleViewModel: ViewModel {
         }
         return wordDictionary
     }
-    
-    // "wordsArray" returns an array with all words in the string
-    // One letter strings (A, é, ϴ, a) are ignored
-    private func wordsArray(text: String) -> [String] {
-        text.split { !$0.isLetter }.map { String($0.lowercased()) }.filter { $0.count > 1 }
-    }
 }
 
 // MARK: - Acticle viewModel input
 extension ArticleViewModel: ArticleViewModelInput {
     func loadArticle() {
-        provider.getArticle(id: articleID) { [weak self] (result, error) in
+        provider.getArticle(id: articleID) { [weak self] (article, error) in
             guard let `self` = self else { return }
             if let error = error {
                 self.delegate?.articleViewModel(self, didReceiveError: error)
-            } else if let article = result?.response?.content {
+            } else if let article = article {
                 self.article = article
                 self.setup(article: article)
             }
@@ -92,6 +92,7 @@ extension ArticleViewModel: ArticleViewModelInput {
         }
     }
     
+    // The method creates and returns TagsCollection viewModel
     func getTagsCollectionViewModel() -> TagsCollectionViewModel {
         TagsCollectionViewModel(tags: tags ?? [], provider: provider)
     }

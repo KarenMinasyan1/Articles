@@ -59,6 +59,7 @@ extension TagsCollectionView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let tagText = viewModel?.getTagText(index: indexPath.row) ?? ""
         print("Tag selected: \(tagText)")
+        // Notify the delegate when a tag is selected
         tagsDelegate?.tagsCollectionView(self, didSelectTag: tagText, row: indexPath.row)
     }
 }

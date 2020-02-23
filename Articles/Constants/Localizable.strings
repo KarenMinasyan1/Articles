@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  Articles
+
+  Created by Karen Minasyan on 2/23/20.
+  Copyright © 2020 KarenMinasyan. All rights reserved.
+*/
+
+// Common
+"Common.OK" = "OK";
+
+// Networking Error
+"Error" = "Error";
+"Error.ArticleList" = "Failed to get article list";
+"Error.Article" = "Failed to get the article";
+"Error.WrongURLComponents" = "URL does not exist";
+"Error.Unknown" = "unknown error";
+
+// ArticleList
+"ArticleList.Navigation.Title" = "News Feed";
+
+// Article
+"Article.Navigation.Title" = "Article";

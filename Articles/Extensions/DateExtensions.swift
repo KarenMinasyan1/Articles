@@ -9,6 +9,7 @@
 import Foundation
 
 extension Date {
+    // The mothod converts date to string
     func toString(dateStyle: DateFormatter.Style = .medium) -> String {
         let formatter = DateFormatter()
         formatter.dateStyle = dateStyle

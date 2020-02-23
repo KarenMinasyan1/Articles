@@ -9,6 +9,7 @@
 import Foundation
 
 extension Array where Element: Hashable {
+    // The property returns a new array with no duplicates
     var uniques: Array {
         var buffer = Array()
         var added = Set<Element>()

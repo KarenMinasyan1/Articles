@@ -18,6 +18,6 @@ class ArticleCell: UITableViewCell {
     
     func setupWith(viewModel: ArticleCellViewModel) {
         articleTitleLabel.text = viewModel.getTitle()
-        articleImageView.kf.setImage(with: viewModel.getImageURL(), placeholder: UIImage(named: "article_placeholder"))
+        articleImageView.kf.setImage(with: viewModel.getImageURL(), placeholder: UIImage(named: "no_image_placeholder"))
     }
 }

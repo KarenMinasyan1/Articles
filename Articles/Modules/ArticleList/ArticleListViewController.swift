@@ -11,17 +11,29 @@ import UIKit
 class ArticleListViewController: UITableViewController {
 
     var viewModel: ArticleListViewModel!
-    var reachedBottom = false
+    var reachedBottom = false // Becomes "true" when table view scrolls to the end
     let spinner = UIActivityIndicatorView(style: .medium)
-    let articleCellHeight = CGFloat(92)
     
     // MARK: - ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.delegate = self
-        viewModel.resetArticles()
+        viewModel.resetArticles() // tell viewModel to load first page
+        configureUI()
         setupTableView()
         refreshControl?.beginRefreshing()
+    }
+    
+    // MARK: - UI
+    func configureUI() {
+        navigationItem.title = NSLocalizedString("ArticleList.Navigation.Title", comment: "")
+    }
+    
+    func stopActivities() {
+        refreshControl?.endRefreshing()
+        tableView.tableFooterView?.isHidden = true
+        reachedBottom = false
+        spinner.stopAnimating()
     }
     
     // MARK: Table view configurations
@@ -31,14 +43,6 @@ class ArticleListViewController: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
         tableView.tableFooterView = spinner
         tableView.tableFooterView?.isHidden = true
-    }
-    
-    // MARK: - UI
-    func stopActivities() {
-        refreshControl?.endRefreshing()
-        tableView.tableFooterView?.isHidden = true
-        reachedBottom = false
-        spinner.stopAnimating()
     }
     
     // MARK: - Table view data source
@@ -63,7 +67,7 @@ class ArticleListViewController: UITableViewController {
             reachedBottom = true
             tableView.tableFooterView?.isHidden = false
             spinner.startAnimating()
-            viewModel.loadMoreArticles()
+            viewModel.loadMoreArticles() // tell viewModel to load next page
         }
     }
     
@@ -87,7 +91,7 @@ extension ArticleListViewController: ArticleListViewModelDelegate {
         }
     }
     
-    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceiveError error: ArticleAPIError) {
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceiveError error: AppError) {
         DispatchQueue.main.async {
             self.show(error: error)
             self.stopActivities()
@@ -95,6 +99,7 @@ extension ArticleListViewController: ArticleListViewModelDelegate {
     }
     
     func articleListViewModel(_ viewmodel: ArticleListViewModel, didSelectArticle viewModel: ArticleViewModel) {
+        // Navigating to Article page
         if let viewController = UIStoryboard.main.instantiateViewController(withIdentifier: "ArticleVC") as? ArticleViewController {
             viewController.viewModel = viewModel
             navigationController?.pushViewController(viewController, animated: true)

@@ -13,16 +13,13 @@ extension UIViewController {
     // Method for showing alerts in view controllers with message and title
     func showAlert(message: String, title: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let oKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        let oKAction = UIAlertAction(title: NSLocalizedString("Common.OK", comment: ""), style: .default, handler: nil)
         alertController.addAction(oKAction)
         present(alertController, animated: true, completion: nil)
     }
     
-    // Method for showing error alerts in view controllers
-    func show(error: ArticleAPIError) {
-        switch error {
-        case .requestError(let message):
-            showAlert(message: message, title: "Error")
-        }
+    // Method for showing errors in view controllers
+    func show(error: AppError) {
+        showAlert(message: error.message, title: NSLocalizedString("Error", comment: ""))
     }
 }

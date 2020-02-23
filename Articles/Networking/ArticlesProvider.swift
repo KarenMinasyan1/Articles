@@ -9,8 +9,8 @@
 import Foundation
 
 protocol ArticleAPI {
-    func getArticleList(page: Int, completion: @escaping (ArticleListResponse?, ArticleAPIError?) -> ())
-    func getArticle(id: String, completion: @escaping (ArticleResponse?, ArticleAPIError?) -> ())
+    func getArticleList(page: Int, pageSize: Int, completion: @escaping ([Article]?, AppError?) -> ())
+    func getArticle(id: String, completion: @escaping (Article?, AppError?) -> ())
 }
 
 class ArticlesProvider: ArticleAPI {
@@ -18,16 +18,29 @@ class ArticlesProvider: ArticleAPI {
     /// The method returns a list of articles with extra field thumbnail
     /// - Parameters:
     ///   - page: articles page
-    func getArticleList(page: Int, completion: @escaping (ArticleListResponse?, ArticleAPIError?) -> ()) {
-        let params = ["page": String(page), "show-fields": "thumbnail", "page-size": "\(Constants.pageSize)", "api-key": Constants.apiKey]
-        Networking.makeNetworkRequest(url: Constants.baseURL, path: "/search", params: params, responseType: ArticleListResponse.self, completion: completion)
+    ///   - pageSize: articles count per page
+    func getArticleList(page: Int, pageSize: Int, completion: @escaping ([Article]?, AppError?) -> ()) {
+        let params = ["page": String(page), "show-fields": "thumbnail", "page-size": "\(pageSize)", "api-key": Constants.apiKey]
+        Networking.getRequest(url: Constants.baseURL, path: "/search", params: params, responseType: ArticleListResponse.self, completion: { articleListResponse, error in
+            if error != nil {
+                completion(nil, AppError.articleList)
+            } else {
+                completion(articleListResponse?.response?.results, nil)
+            }
+        })
     }
     
     /// The method returns a single article with extra fields (thumbnail, bodyText, headline)
     /// - Parameters:
     ///   - id: The article id
-    func getArticle(id: String, completion: @escaping (ArticleResponse?, ArticleAPIError?) -> ()) {
-        let params = ["show-fields": "thumbnail,bodyText,headline", "page-size": "\(Constants.pageSize)", "api-key": Constants.apiKey]
-        Networking.makeNetworkRequest(url: Constants.baseURL, path: "/\(id)", params: params, responseType: ArticleResponse.self, completion: completion)
+    func getArticle(id: String, completion: @escaping (Article?, AppError?) -> ()) {
+        let params = ["show-fields": "thumbnail,bodyText,headline", "api-key": Constants.apiKey]
+        Networking.getRequest(url: Constants.baseURL, path: "/\(id)", params: params, responseType: ArticleResponse.self, completion: { articleResponse, error in
+            if error != nil {
+                completion(nil, AppError.article)
+            } else {
+                completion(articleResponse?.response?.content, nil)
+            }
+        })
     }
 }
