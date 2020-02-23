@@ -101,7 +101,9 @@ extension ArticleViewController: ArticleViewModelDelegate {
     }
     
     func articleViewModel(_ viewmodel: ArticleViewModel, didReceiveError error: AppError) {
-        show(error: error)
+        DispatchQueue.main.async {
+            self.show(error: error)
+        }
     }
 }
 
