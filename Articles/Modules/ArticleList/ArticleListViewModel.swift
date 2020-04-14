@@ -8,7 +8,7 @@
 
 // MARK: - ArticleList ViewModel delegate
 protocol ArticleListViewModelDelegate: AnyObject {
-    func articleListViewModelDidReceiveArticles(_ viewmodel: ArticleListViewModel)
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, DidReceiveNewRows rows: Range<Int>)
     func articleListViewModel(_ viewmodel: ArticleListViewModel, didReceiveError error: AppError)
     func articleListViewModel(_ viewmodel: ArticleListViewModel, didSelectArticle viewModel: ArticleViewModel)
 }
@@ -45,7 +45,8 @@ class ArticleListViewModel: ViewModel {
         } else {
             articles += value
         }
-        delegate?.articleListViewModelDidReceiveArticles(self)
+        let rows = (articles.count - Constants.pageSize) ..< articles.count
+        delegate?.articleListViewModel(self, DidReceiveNewRows: rows)
     }
 }
 

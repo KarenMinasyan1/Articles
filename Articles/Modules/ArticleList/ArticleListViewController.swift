@@ -84,10 +84,10 @@ class ArticleListViewController: UITableViewController {
 
 // MARK: - ViewModel output
 extension ArticleListViewController: ArticleListViewModelDelegate {
-    func articleListViewModelDidReceiveArticles(_ viewmodel: ArticleListViewModel) {
+    func articleListViewModel(_ viewmodel: ArticleListViewModel, DidReceiveNewRows rows: Range<Int>) {
         DispatchQueue.main.async {
             self.stopActivities()
-            self.tableView.reloadData()
+            self.tableView.insertRows(at: rows.map { IndexPath(row: $0, section: 0) }, with: .fade)
         }
     }
     
